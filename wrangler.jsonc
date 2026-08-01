@@ -2,11 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "repoman",
   "compatibility_date": "2026-08-01",
-  "observability": {
-    "enabled": true
-  },
   "assets": {
-    "directory": "public"
+    "directory": "."
   },
   "compatibility_flags": [
     "nodejs_compat"
