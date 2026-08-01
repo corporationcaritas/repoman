@@ -2,3 +2,6 @@ node_modules/
 caritas_pqc_private.hex
 .env
 *.log
+node_modules/
+.wrangler/
+.env
