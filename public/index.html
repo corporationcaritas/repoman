@@ -3,130 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caritas Corporation - Sovereign Reentry & Quantum Credentials</title>
+    <title>Caritas Corporation — Sovereign Network Authority</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;600&display=swap');
-        .font-serif-brand { font-family: 'Cinzel', serif; }
-        .font-sans-body { font-family: 'Space Grotesk', sans-serif; }
-        .font-mono-code { font-family: 'Fira Code', monospace; }
-        .lattice-bg {
-            background-image: radial-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px), radial-gradient(rgba(245, 158, 11, 0.05) 1px, transparent 1px);
-            background-size: 32px 32px;
-            background-position: 0 0, 16px 16px;
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        :root {
+            --obsidian: #08090B;
+            --onyx: #111318;
+            --onyx-card: #161920;
+            --gold-primary: #D4AF37;
+            --gold-light: #F3E5AB;
+            --gold-dim: #8C7323;
+            --grey-border: #262933;
+            --grey-text: #949BA8;
+        }
+
+        body {
+            background-color: var(--obsidian);
+            color: #FFFFFF;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .font-brand { font-family: 'Cinzel', serif; }
+        .font-mono-spec { font-family: 'JetBrains Mono', monospace; }
+
+        /* Custom Gold Glows & Gradients */
+        .text-gold {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F3E5AB 40%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 0 25px -5px rgba(212, 175, 55, 0.08);
+        }
+
+        .gold-border-glow:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 30px -2px rgba(212, 175, 55, 0.18);
+        }
+
+        .gold-btn {
+            background: linear-gradient(135deg, #D4AF37 0%, #AA820A 100%);
+            color: #08090B;
+            transition: all 0.25s ease;
+        }
+
+        .gold-btn:hover {
+            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 100%);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .subtle-lattice {
+            background-image: 
+                radial-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+                radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
         }
     </style>
 </head>
-<body class="bg-[#06080d] text-slate-100 font-sans-body min-h-screen lattice-bg flex flex-col justify-between selection:bg-amber-500 selection:text-black">
+<body class="min-h-screen flex flex-col justify-between subtle-lattice selection:bg-[#D4AF37] selection:text-black">
 
-    <!-- Header / Branding Navigation -->
-    <nav class="border-b border-slate-800/80 bg-[#06080d]/80 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="/" class="flex items-center space-x-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-emerald-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-serif-brand text-lg group-hover:scale-105 transition-transform">
+    <!-- Top Navigation -->
+    <nav class="border-b border-[#262933] bg-[#08090B]/90 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-4 group">
+                <div class="w-11 h-11 rounded-xl bg-[#111318] border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] font-brand text-xl group-hover:scale-105 transition-transform duration-300">
                     ❖
                 </div>
                 <div>
-                    <span class="font-serif-brand font-bold tracking-widest text-white text-base block leading-none">CARITAS</span>
-                    <span class="text-[9px] font-mono-code tracking-[0.25em] text-amber-400/90 uppercase block mt-1">Corporation</span>
+                    <span class="font-brand font-bold tracking-[0.2em] text-white text-lg block leading-none">CARITAS</span>
+                    <span class="text-[9px] font-mono-spec tracking-[0.3em] text-[#D4AF37] uppercase block mt-1">Corporation</span>
                 </div>
             </a>
 
-            <div class="flex items-center space-x-6 text-xs font-mono-code">
-                <a href="/.well-known/pqc-key.hex" class="hidden sm:inline-block text-slate-400 hover:text-emerald-400 transition-colors">
+            <div class="flex items-center space-x-6 text-xs font-mono-spec">
+                <a href="/.well-known/pqc-key.hex" class="hidden md:inline-block text-[#949BA8] hover:text-[#D4AF37] transition-colors">
                     [Key Registry]
                 </a>
-                <a href="/verify.html" class="px-4 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-emerald-300 font-semibold hover:bg-emerald-500/20 transition-all flex items-center space-x-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <a href="/verify.html" class="px-5 py-2.5 rounded-xl bg-[#111318] border border-[#D4AF37]/40 text-[#F3E5AB] font-semibold hover:border-[#D4AF37] hover:bg-[#161920] transition-all flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></span>
                     <span>Audit Portal</span>
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero / Mission Architecture Section -->
-    <main class="max-w-6xl mx-auto px-6 py-16 sm:py-24">
+    <!-- Main Hero Banner -->
+    <main class="max-w-7xl mx-auto px-6 py-20 lg:py-28 flex-grow w-full">
         
-        <!-- Sovereign Governance Tag -->
-        <div class="inline-flex items-center space-x-3 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono-code mb-8">
-            <span class="text-amber-400">⚖</span>
-            <span class="tracking-wider uppercase">Governed by The People • Decentralized Authority</span>
+        <!-- Badge -->
+        <div class="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full bg-[#111318] border border-[#D4AF37]/30 text-xs font-mono-spec mb-10">
+            <span class="text-[#D4AF37]">⚖</span>
+            <span class="tracking-widest uppercase text-white">Governed by The People</span>
+            <span class="text-[#262933]">|</span>
+            <span class="text-[#949BA8]">Decentralized Authority</span>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Headline -->
+        <div class="max-w-4xl space-y-8">
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-brand tracking-tight text-white leading-[1.1]">
+                Sovereign Infrastructure. <br />
+                <span class="text-gold">Post-Quantum Integrity.</span>
+            </h1>
             
-            <div class="lg:col-span-7 space-y-6">
-                <h1 class="text-3xl sm:text-5xl font-bold font-serif-brand tracking-tight text-white leading-tight">
-                    Sovereign Credentials for Human Advancement & Reentry
-                </h1>
-                
-                <p class="text-slate-300 text-base leading-relaxed">
-                    Caritas Corporation bridges human potential with formal recognition. We issue tamper-proof educational, apprenticeship, and professional credentials powered by <strong class="text-emerald-400">NIST FIPS 204 Post-Quantum Cryptography (ML-DSA-65)</strong>.
+            <p class="text-[#949BA8] text-base sm:text-xl font-light leading-relaxed max-w-3xl">
+                Caritas Corporation delivers immutable credentialing and organizational governance backed by <strong class="text-white font-medium">NIST FIPS 204 Post-Quantum Cryptography (ML-DSA-65)</strong>. Designed by the people, built for high-integrity advancement.
+            </p>
+
+            <div class="pt-4 flex flex-wrap items-center gap-4 font-mono-spec text-xs">
+                <a href="/verify.html" class="gold-btn px-8 py-4 rounded-xl font-bold tracking-wide">
+                    Access Audit Verifier →
+                </a>
+                <a href="/.well-known/pqc-key.hex" target="_blank" class="px-8 py-4 rounded-xl bg-[#111318] border border-[#262933] text-white hover:border-[#D4AF37]/50 transition-all">
+                    Public Key Registry
+                </a>
+            </div>
+        </div>
+
+        <!-- 3 Core Pillars Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-24">
+            
+            <div class="bg-[#111318] rounded-2xl p-8 gold-border-glow transition-all duration-300">
+                <div class="text-[#D4AF37] font-mono-spec text-xs mb-4 uppercase tracking-widest">Pillar 01</div>
+                <h3 class="text-xl font-brand font-bold text-white mb-3">Decentralized Governance</h3>
+                <p class="text-xs text-[#949BA8] leading-relaxed">
+                    Root authority rests directly with the community. Transparent operational protocols ensure total accountability without institutional lock-in.
                 </p>
-
-                <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono-code space-y-2">
-                    <div class="flex justify-between text-slate-400">
-                        <span>Root Authority:</span>
-                        <span class="text-amber-400">The People (Decentralized)</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Operational Issuer:</span>
-                        <span class="text-slate-200">Caritas Corporation</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Cryptographic Standard:</span>
-                        <span class="text-emerald-400">Module-Lattice Digital Signatures</span>
-                    </div>
-                </div>
-
-                <div class="pt-4 flex flex-wrap gap-4 font-mono-code text-xs">
-                    <a href="/verify.html" class="px-6 py-3 rounded-xl bg-amber-500 text-slate-950 font-bold hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/10">
-                        Open Audit Verifier →
-                    </a>
-                    <a href="/.well-known/pqc-key.hex" target="_blank" class="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 transition-all">
-                        Fetch Root Public Key
-                    </a>
-                </div>
             </div>
 
-            <div class="lg:col-span-5">
-                <div class="bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 space-y-6 relative shadow-2xl">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                        <span class="text-xs font-mono-code text-slate-400">SYSTEM ARCHITECTURE</span>
-                        <span class="text-xs font-mono-code text-emerald-400">FIPS 204 ACTIVE</span>
-                    </div>
+            <div class="bg-[#111318] rounded-2xl p-8 gold-border-glow transition-all duration-300">
+                <div class="text-[#D4AF37] font-mono-spec text-xs mb-4 uppercase tracking-widest">Pillar 02</div>
+                <h3 class="text-xl font-brand font-bold text-white mb-3">Quantum Resistance</h3>
+                <p class="text-xs text-[#949BA8] leading-relaxed">
+                    Protected by lattice-based signature algorithms designed to remain secure against next-generation quantum computing decryption threats.
+                </p>
+            </div>
 
-                    <div class="space-y-4">
-                        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800/80">
-                            <h3 class="text-sm font-bold text-slate-100 mb-1">Decentralized Trust Root</h3>
-                            <p class="text-xs text-slate-400">Governance anchored in collective civic authority, preventing institutional single points of failure.</p>
-                        </div>
-
-                        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800/80">
-                            <h3 class="text-sm font-bold text-slate-100 mb-1">Lattice-Based Encryption</h3>
-                            <p class="text-xs text-slate-400">Protected by ML-DSA-65 algorithms designed to resist quantum computer cryptographic decryption.</p>
-                        </div>
-
-                        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800/80">
-                            <h3 class="text-sm font-bold text-slate-100 mb-1">State Statutory Alignment</h3>
-                            <p class="text-xs text-slate-400">Structured according to standard Schema.org specifications for seamless government validation.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="bg-[#111318] rounded-2xl p-8 gold-border-glow transition-all duration-300">
+                <div class="text-[#D4AF37] font-mono-spec text-xs mb-4 uppercase tracking-widest">Pillar 03</div>
+                <h3 class="text-xl font-brand font-bold text-white mb-3">Verifiable Credentials</h3>
+                <p class="text-xs text-[#949BA8] leading-relaxed">
+                    Zero-knowledge client-side audit tools allow immediate, tamper-proof validation of certificates and legal instruments worldwide.
+                </p>
             </div>
 
         </div>
+
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800/80 bg-[#06080d] py-8">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 font-mono-code gap-4">
-            <div>
-                © 2026 Caritas Corporation. All rights reserved.
+    <footer class="border-t border-[#262933] bg-[#08090B] py-8">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center text-xs text-[#949BA8] font-mono-spec gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="text-[#D4AF37]">❖</span>
+                <span>Caritas Corporation © 2026</span>
             </div>
             <div class="flex space-x-6">
-                <a href="/verify.html" class="hover:text-emerald-400 transition-colors">Verifier Portal</a>
-                <a href="/.well-known/pqc-key.hex" class="hover:text-amber-400 transition-colors">Key Registry</a>
+                <a href="/verify.html" class="hover:text-[#D4AF37] transition-colors">Audit Verifier</a>
+                <a href="/.well-known/pqc-key.hex" class="hover:text-[#D4AF37] transition-colors">Root Key</a>
             </div>
         </div>
     </footer>
