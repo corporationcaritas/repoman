@@ -11,10 +11,8 @@
         :root {
             --obsidian: #08090B;
             --onyx: #111318;
-            --onyx-card: #161920;
             --gold-primary: #D4AF37;
             --gold-light: #F3E5AB;
-            --gold-dim: #8C7323;
             --grey-border: #262933;
             --grey-text: #949BA8;
         }
@@ -28,7 +26,6 @@
         .font-brand { font-family: 'Cinzel', serif; }
         .font-mono-spec { font-family: 'JetBrains Mono', monospace; }
 
-        /* Custom Gold Glows & Gradients */
         .text-gold {
             background: linear-gradient(135deg, #FFFFFF 0%, #F3E5AB 40%, #D4AF37 100%);
             -webkit-background-clip: text;
@@ -81,9 +78,6 @@
             </a>
 
             <div class="flex items-center space-x-6 text-xs font-mono-spec">
-                <a href="/.well-known/pqc-key.hex" class="hidden md:inline-block text-[#949BA8] hover:text-[#D4AF37] transition-colors">
-                    [Key Registry]
-                </a>
                 <a href="/verify.html" class="px-5 py-2.5 rounded-xl bg-[#111318] border border-[#D4AF37]/40 text-[#F3E5AB] font-semibold hover:border-[#D4AF37] hover:bg-[#161920] transition-all flex items-center space-x-2">
                     <span class="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></span>
                     <span>Audit Portal</span>
@@ -95,7 +89,6 @@
     <!-- Main Hero Banner -->
     <main class="max-w-7xl mx-auto px-6 py-20 lg:py-28 flex-grow w-full">
         
-        <!-- Badge -->
         <div class="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full bg-[#111318] border border-[#D4AF37]/30 text-xs font-mono-spec mb-10">
             <span class="text-[#D4AF37]">⚖</span>
             <span class="tracking-widest uppercase text-white">Governed by The People</span>
@@ -103,7 +96,6 @@
             <span class="text-[#949BA8]">Decentralized Authority</span>
         </div>
 
-        <!-- Headline -->
         <div class="max-w-4xl space-y-8">
             <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-brand tracking-tight text-white leading-[1.1]">
                 Sovereign Infrastructure. <br />
@@ -118,54 +110,44 @@
                 <a href="/verify.html" class="gold-btn px-8 py-4 rounded-xl font-bold tracking-wide">
                     Access Audit Verifier →
                 </a>
-                <a href="/.well-known/pqc-key.hex" target="_blank" class="px-8 py-4 rounded-xl bg-[#111318] border border-[#262933] text-white hover:border-[#D4AF37]/50 transition-all">
-                    Public Key Registry
-                </a>
             </div>
         </div>
 
-        <!-- 3 Core Pillars Section -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-24">
-            
-            <div class="bg-[#111318] rounded-2xl p-8 gold-border-glow transition-all duration-300">
+            <div class="bg-[#111318] rounded-2xl p-8 gold-border-glow">
                 <div class="text-[#D4AF37] font-mono-spec text-xs mb-4 uppercase tracking-widest">Pillar 01</div>
                 <h3 class="text-xl font-brand font-bold text-white mb-3">Decentralized Governance</h3>
                 <p class="text-xs text-[#949BA8] leading-relaxed">
-                    Root authority rests directly with the community. Transparent operational protocols ensure total accountability without institutional lock-in.
+                    Root authority rests directly with the community. Transparent operational protocols ensure total accountability.
                 </p>
             </div>
 
-            <div class="bg-[#111318] rounded-2xl p-8 gold-border-glow transition-all duration-300">
+            <div class="bg-[#111318] rounded-2xl p-8 gold-border-glow">
                 <div class="text-[#D4AF37] font-mono-spec text-xs mb-4 uppercase tracking-widest">Pillar 02</div>
                 <h3 class="text-xl font-brand font-bold text-white mb-3">Quantum Resistance</h3>
                 <p class="text-xs text-[#949BA8] leading-relaxed">
-                    Protected by lattice-based signature algorithms designed to remain secure against next-generation quantum computing decryption threats.
+                    Protected by lattice-based signature algorithms designed to remain secure against next-generation threats.
                 </p>
             </div>
 
-            <div class="bg-[#111318] rounded-2xl p-8 gold-border-glow transition-all duration-300">
+            <div class="bg-[#111318] rounded-2xl p-8 gold-border-glow">
                 <div class="text-[#D4AF37] font-mono-spec text-xs mb-4 uppercase tracking-widest">Pillar 03</div>
                 <h3 class="text-xl font-brand font-bold text-white mb-3">Verifiable Credentials</h3>
                 <p class="text-xs text-[#949BA8] leading-relaxed">
-                    Zero-knowledge client-side audit tools allow immediate, tamper-proof validation of certificates and legal instruments worldwide.
+                    Zero-knowledge client-side audit tools allow immediate, tamper-proof validation of certificates worldwide.
                 </p>
             </div>
-
         </div>
 
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-[#262933] bg-[#08090B] py-8">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center text-xs text-[#949BA8] font-mono-spec gap-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center text-xs text-[#949BA8] font-mono-spec">
             <div class="flex items-center space-x-2">
                 <span class="text-[#D4AF37]">❖</span>
                 <span>Caritas Corporation © 2026</span>
             </div>
-            <div class="flex space-x-6">
-                <a href="/verify.html" class="hover:text-[#D4AF37] transition-colors">Audit Verifier</a>
-                <a href="/.well-known/pqc-key.hex" class="hover:text-[#D4AF37] transition-colors">Root Key</a>
-            </div>
+            <a href="/verify.html" class="hover:text-[#D4AF37] transition-colors">Audit Verifier</a>
         </div>
     </footer>
 
