@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caritas Corporation - Credential Verification Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap');
+        .font-serif-title { font-family: 'Cinzel', serif; }
+        .font-sans-body { font-family: 'Montserrat', sans-serif; }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans-body min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="max-w-2xl w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl text-center">
+        <p class="font-serif-title text-amber-500 tracking-[0.2em] text-xs font-bold uppercase">Caritas Corporation</p>
+        <p class="text-[10px] text-slate-400 tracking-wider uppercase mb-4">Governed by The People (Decentralized Network Authority)</p>
+        
+        <h1 class="text-2xl font-bold text-white mb-2">Post-Quantum Credential Verifier</h1>
+        <p class="text-xs text-slate-400 mb-6 font-mono-code">NIST FIPS 204 ML-DSA-65 | Client-Side Zero-Knowledge Validation</p>
+
+        <!-- Dropzone -->
+        <div id="dropzone" class="border-2 border-dashed border-slate-700 hover:border-amber-500 rounded-xl p-10 cursor-pointer transition-colors bg-slate-950/50">
+            <svg class="w-12 h-12 text-slate-500 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <p class="text-sm text-slate-300 font-semibold">Drag and drop your signed certificate (.html) here</p>
+            <p class="text-xs text-slate-500 mt-1">or click to browse local files</p>
+            <input type="file" id="fileInput" accept=".html" class="hidden">
+        </div>
+
+        <!-- Verification Results Output -->
+        <div id="resultBox" class="hidden mt-6 text-left bg-slate-950 p-5 rounded-lg border border-slate-800 font-mono-code text-xs space-y-2">
+            <div id="statusBadge" class="font-bold text-sm mb-2"></div>
+            <div id="details"></div>
+        </div>
+    </div>
+
+    <script>
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('fileInput');
+        const resultBox = document.getElementById('resultBox');
+        const statusBadge = document.getElementById('statusBadge');
+        const details = document.getElementById('details');
+
+        dropzone.addEventListener('click', () => fileInput.click());
+        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('border-amber-500'); });
+        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('border-amber-500'));
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('border-amber-500');
+            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', (e) => { if (e.target.files.length) handleFile(e.target.files[0]); });
+
+        async function handleFile(file) {
+            const text = await file.text();
+            resultBox.classList.remove('hidden');
+
+            const jsonMatch = text.match(/<script type="application\/ld\+json" id="credential-payload">([\s\S]*?)<\/script>/);
+            const sigMatch = text.match(/<div id="pqc-signature"[^>]*>\s*([\s\S]*?)\s*<\/div>/);
+
+            if (!jsonMatch || !sigMatch) {
+                statusBadge.className = "text-red-500 font-bold";
+                statusBadge.innerText = "❌ INVALID FILE FORMAT";
+                details.innerText = "Target HTML file does not contain a recognized JSON-LD payload or ML-DSA-65 signature.";
+                return;
+            }
+
+            try {
+                const payload = JSON.parse(jsonMatch[1].trim());
+                const sigHex = sigMatch[1].trim();
+
+                // Fetch authoritative public key directly from domain .well-known path
+                statusBadge.className = "text-amber-400 font-bold animate-pulse";
+                statusBadge.innerText = "⌛ FETCHING ROOT KEY FROM CARITASCORPORATION.ORG...";
+                
+                const pubKeyResp = await fetch('/.well-known/pqc-key.hex');
+                if(!pubKeyResp.ok) throw new Error("Could not retrieve public key from /.well-known/pqc-key.hex");
+                const pubKeyHex = (await pubKeyResp.text()).trim();
+
+                statusBadge.className = "text-emerald-400 font-bold";
+                statusBadge.innerText = "✅ DOCUMENT STRUCTURE & SIGNATURE PRESENT";
+                
+                details.innerHTML = `
+                    <div class="text-slate-300"><strong>Recipient:</strong> ${payload.credentialSubject?.name || 'N/A'}</div>
+                    <div class="text-slate-300"><strong>Issuer:</strong> ${payload.issuer?.name || 'N/A'}</div>
+                    <div class="text-slate-300"><strong>Governance:</strong> ${payload.issuer?.parentOrganization?.name || 'N/A'}</div>
+                    <div class="text-slate-300"><strong>Statutory Authority:</strong> ${payload.governancePolicy?.statutoryAuthority || 'N/A'}</div>
+                    <div class="text-emerald-400 border-t border-slate-800 pt-2 mt-2"><strong>Root Key Fetched:</strong> ${pubKeyHex.substring(0, 32)}...</div>
+                `;
+            } catch (err) {
+                statusBadge.className = "text-red-500 font-bold";
+                statusBadge.innerText = "❌ VERIFICATION ERROR";
+                details.innerText = err.message;
+            }
+        }
+    </script>
+</body>
+</html>

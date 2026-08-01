@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Quantum Verified Credential</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap');
+        .font-serif-title { font-family: 'Cinzel', serif; }
+        .font-sans-body { font-family: 'Montserrat', sans-serif; }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+    </style>
+    
+    <script type="application/ld+json" id="credential-payload">
+    {"@context":["https://www.w3.org/ns/credentials/v2","https://schema.org"],"credentialCategory":"State Recognized Certificate of Completion","credentialSubject":{"name":"Participant Name"},"dateCreated":"2026-08-01","governancePolicy":{"name":"Certification Practice Statement (CPS)"},"id":"urn:uuid:CRT-2026-00101","issuer":{"name":"Caritas Corporation"},"name":"Electrical Apprenticeship","type":["VerifiableCredential","EducationalOccupationalCredential"]}
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans-body min-h-screen py-10 px-4 flex flex-col items-center">
+
+    <div class="max-w-4xl w-full bg-slate-900 border border-slate-800 rounded-xl p-8 shadow-2xl relative overflow-hidden">
+        
+        <div class="flex flex-wrap justify-between items-center bg-emerald-950/60 border border-emerald-500/40 p-4 rounded-lg mb-8">
+            <div class="flex items-center gap-3">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+                <div>
+                    <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-wider">Post-Quantum Cryptographic Proof Attached</h3>
+                    <p class="text-xs text-slate-400 font-mono-code">NIST FIPS 204 ML-DSA-65 | Governed by The People</p>
+                </div>
+            </div>
+            <span class="bg-emerald-500/10 text-emerald-300 text-xs font-mono-code px-3 py-1 rounded border border-emerald-500/30">TAMPER-PROOF</span>
+        </div>
+
+        <div class="border-2 border-amber-500/50 p-8 rounded-lg bg-slate-900/90 text-center relative">
+            <p class="font-serif-title text-amber-500 tracking-[0.25em] text-xs font-bold uppercase">Caritas Corporation</p>
+            <p class="text-[10px] text-slate-400 tracking-wider uppercase mb-2">Controlled by and for The People</p>
+            
+            <h1 class="font-serif-title text-3xl sm:text-4xl font-extrabold text-white mt-2">CERTIFICATE OF COMPLETION</h1>
+            
+            <p class="text-xs text-slate-400 uppercase tracking-widest mt-6">This Verified Credential Is Awarded To</p>
+            <h2 class="text-4xl font-extrabold text-amber-400 my-2 border-b border-slate-700 inline-block px-8 pb-1">Participant Name</h2>
+            
+            <p class="max-w-xl mx-auto text-sm text-slate-300 mt-4 leading-relaxed">
+                For successful completion of <strong class="text-white">Electrical Apprenticeship</strong>.
+            </p>
+
+            <div class="mt-8 pt-6 border-t border-slate-800 flex justify-between text-left text-xs text-slate-400 font-mono-code">
+                <div>Issue Date: <span class="text-white">2026-08-01</span></div>
+                <div>ID: <span class="text-white">urn:uuid:CRT-2026-00101</span></div>
+            </div>
+        </div>
+
+        <div class="mt-6 bg-slate-950 p-4 rounded-lg border border-slate-800 font-mono-code text-[11px] space-y-3">
+            <div class="text-amber-400 font-bold border-b border-slate-800 pb-1 flex justify-between">
+                <span>ON-CHAIN / DECENTRALIZED PQC PROOF PAYLOAD</span>
+                <span class="text-slate-500">SHA3-512</span>
+            </div>
+            
+            <div>
+                <span class="text-slate-500 block">Canonical Payload Hash:</span>
+                <span class="text-emerald-400 break-all">87fa7c5a5bc15744fbb57919b630603a4bb94759cda56e46d2710b24dedc1e6c76009daa92376b38289e1ce6a3e864e47a8d284a4f894364b8a730e69954bc46</span>
+            </div>
+
+            <div>
+                <span class="text-slate-500 block">ML-DSA-65 Signature:</span>
+                <div id="pqc-signature" class="text-slate-300 break-all bg-slate-900 p-2 rounded max-h-20 overflow-y-auto border border-slate-800 text-[10px] my-1">
+                    8530642153e9507b59c49afa6e68bb9c62a2d37e58518d94cc25c799382091f47a117d584e240e7f46c0a8c82ede783bc20d88af4b409d8ddfb9c971666eb9f09c4707c02cde8badcf02b752b68ce1047afb1cacfd58b12c182878c0b8b48e333500cb5bf4457339f0fca18727e4afaeafcebfaec3be17d7f7317440db1207c77f0afe82d5f15b88682e5bdbfd02a9eb2ce260a9876983afd9ca90af047b570c7c20b9378a50dcb88a7ec0ac29c243fa5be0861723213fdac428d7fbe075689da85d37c4f1b849564b724a7cfaa823720ad4e0317dfd1770a14156dbe8eb75aa2e6d199281bfd32096dbc5c50e0f47fed3883d7aaf268a2ec837c175afa368bcc21e568b78cfb8f3dc09398375e03c2a0a8c5381778e277bdea9603b695b426e45bf686d4bef3a4d724dcd626e9a1b2e31c6605bd4933568f5787b341c7ff25558320cb49771490e72d2ff856f9810a9236d47d63c8abbe2a2049ee3d8b1521c17993d61154de1dbf24a7cf245f337a5506a5862d73c676803d65c294819e40909237dae38d517a7be231a5059c20b8c692a535c83880f39c58242c269cc75cfc39b2e1e1fc62ac20ffdd481e2426add4c7332522a81990cb5e18c941f1d59dd6c8b517ed40d97a940c1fcd5392c0dcfbf1864d81924000033da33c95ed7115f47927e7f1726465f928ef6db62867ab5b4a76bfc6a08a289bf91d2d3ddda9c6a4a1a2dcd2ff971783bafd00c8aaa1ee68751373054f45e1aa13fd91eeaf5a20a861543d8d21ff7083a440b6046d423f06ed9c1bd5e39a25c31d06f1a41576a9402920300995331a116893a56c17e3e3e774561acb483cb1af8864a941d60b25fe13081d3bf85996ca8a55a9ee22364c0c67eb8e49b35d80547da4a99c9144be2d79cbb35e858122fc299f9a25fc7b8b32170ef51af28d03bb686c7b41b0654c397eea856734e590db6e90cdc5fd6c9b19a832f9d0a660043dcab3ab37dbf6160d56141edea6278cd3f78c4bdbdc7d4330b0bf65f4883bdd69bcb90640ea2c11eac3221af9933c88d7401633546118c216d1cf9c03c079c41c3d3c5f799ead56af65d97f6310bdcfb61974d03ed88fb9ce4bfcd1245207d250c0acc77cd2f5e7d0d00949bf18fa8247b960099686f724e8d4b474dc3382641d80a0d0cd1ee4f15ffdf916846dbfb7d9a323a4c081fe9caa3ee5d3595944c341e530e8b32a31d89fbffe789e6cee2a068042dfecc57c14330ffb6bc4f38b6c99ccb628fe8fc70ba2955c13228298eaddae72c575882d887606690f0873f211b94508237dd62994e00f326eb4ce005636bac90876fd3b4be39db143fc8cb2fdeb77584a8c4925435d2a8413bcb679a43ecfa7c1b430395e8aacec5271fd9e56a393304c9ce892604fb949fd4278044e1df712a637709efd6954c96844f55313f10f54e342b80975d3027c521db89b22ad76b6abb40feef5c85acf4b937b2858ece775bcdd7958e20ebccf375c9c9ebc0f80266179fa4882cb5eb4cd2f8cde2a1f18f49bf2a1db5edb4beed073aa7b7356b99e29e3e3f12b53648270c63c6531e9a20c33d2f5deaad98d2adaae3e3a8864a0f320757203f706bac7738486fb917cb876ad8498d1b73f7a60731e504876444158b500df6045b735fb1cc0874aad8d0f3d533cba9f1b0d37c45224efa620ade93cd4c0327da9056e68c5e47dc6a9f560bdc56f3b7d79b6dd81c91b6a9e15c7b06c0bd605940d42b8c97bf3ff5a82dec24637b7b791927b5a1fc35c3118db6bb87bb50e250afc025ca3abe063e89fd78c0828c08e01f049548b9011d3e84d04f1b7a9623c3910b13e65b7fc0978276f2671d0f60fd0aa7af43cb83a3548f509cc7063f6e49823d12640148ab332798f3c015a6291a11099e89a8610bdd71e75bd1a4cc3ddf8977e0832cafb517fd88dd9974d6e13c6562d0e63ca8a364d225cb7165934aacfe7b7232e50d542d1b7c31803fe4b509619acf44270be1bfeb3c62e96f78e60096644e159d26621157efedb556f31951ac2306af06c6bba607d6a9ce10b491ca8fb3327b349be3058f38d247e80c5d007bb74913abd5994abbbaf57a87e35a55797cec65b29244be4bfc2ddecdceb0f8ae17b1139af1dd1a5b951b95f95b6c662dda40fd02322fb8071bb16540e1bb75c86b54078e3350ac3f563f4be9467d89c285c55c34f386b063b86c87e07e64c150ab117581aac7eda04e027066deb3c5ce0494ac4d9ef7e055375f5e67e4bb2cd765878e1879bd1f7bd5747c3159700ab9c532096b39dff1935caaf7ee1535e37694c105b7950b973cbd6f64423e0adc2af5e23bb076137187d4d0d3a4605721bdff1125bce69861649b1bd51a843c43440e7509daf40a5cde29b29601a29ccedd9a637f4ef31439124612a30e1b03c740b60e9bc30882a4f2c0e485507fb0beb8bdc3147cb23cf05d0b2640fad479d4164a010427176cec90c7b62479eb8bf81c3d56d99523707d437a0e4c0f9a3cc436c401398556b0cf2fabd1016263152a6b98547e00471281cbc4e2ef680090c3b7d86d66a3831fdc6757704d95ac79d63c57d37bc852ed77bae931f7f5786651d05f2708a5d1bc129be2540c1a5eb46b81c4e5593822e12701c84e6728036a2501923561d9c11dcce927f209fd54a537e4b04f573f41847874cadac2581f165f81b973ca10b4fa4c8f35418468cde730d57d34a768b85541e7bb5a3a48dacbda3bffce3006d9fbd9fa163aa89015a3938b2671df1c3fb5d66b1822a0388578921d7192a49489a471f4a4f7b9ab4c5d2547ee6b317211663bf466cd7e331501a4dea5d693e19b3b2656921b0c07c8590d30347ace82f855f960d3390d4c78110d38a33dd5fac68ba1b5546f740dc983805cf294c122968fa3fb14c8db6f7f5d5cb50a2d48e5d90c82b070252719e9a1cbaef50f9475d57057f248bda953969e6d9ef9d0831a2f355dc17cff96e608883ea2307cbc3a6fc73de42a84b72bd762cb9c0864052a5fda98d58da1ea967c472c32c9af70f609798babfae064df03e3b9bfcc70f9c9e5a1436b2c841caf79e5e184591359477e7635da4cae7efa62f987a6f372d1569b10d7d2f66eb6b19eeb3b391265fbae4f488a8a537412b6aad3a7203a9582edd553d37372666a1a74eb091bdcb9f18b31b688fa4916e4a8f18ab22b137aa7ec8b7e8f4fc8b5495328ad14727904159934482be7c0638602fb236b976d7e1732e99fe9c411b644fb53a23772331921476296e1d0e3f9501324278661b8482ce4cd98df438b8d5532d0928224d0a70b16d404f5cfba07333752269552c1598fab82194c7a884266a4df9b4dd725d43f2f640f5659a4eda7ed2a8e26de6c7cc96b10d64f0290f8b7af8caac81d83babc042cfa3a76b9e34c5d4b525a3b1d0c23691299f151ffef44f75fbb5d6da9185ae874f77cb3581edf50d43a6b40f03b12033bd16dd65fe9892dfe0777e9f5f0ba3c8a5b1ccd46d1a29895bae0892ca624563922b5987cbea3f5cfd1143f181c62ac4092b54035a425aa065164103f3feed7261898fe2732ca6e8eee6cf1aa80090369b14e4d8cbd6c1ccdc97e80d5ff2758b4ca5911547644a9ec346d0bc3ae01916f249109c85e8030d6222a0f4592c39a3a1ba90deb998fe6bd36d74d27a5b6a9b3c693c661730625a9a092d628f637a118c4323eef2380e2bb96ffd8a80a4d123bac32745b511141536ba73844748b006ad8ee5637c527527d53dbfbce05e019a7f170422fa6d8e264ef680558c485efe0bec16dc008bb0a3ccc05624ce021baaebd812e64e918d4c77df07c269e08c10c82d0ceb3430fc21483af81b43ff1ff9d2cd97d36ab3420119ae8ab6353f371670e9d385701abec90f14801651e3bff7aacae5705f7ab60109cd97fc13cfdf62b1173920510127eff1b77ea87781a9ccfc61d1d4a378b9b4a4ffa6cb2b81a49fa1cd548c0c5e5db2edf3b63987c189574af42d0756a76422020194c8d547848f4fe6d040c788c83a5c28292a6af041d00451b878b49bf2599677e9af782569ca941c72376d8ac8ba87d7b961914acbf039dbd8eebf26d7fc0522e6510595b6c5baa5549b17626524006bb849b7f05a2de39525718bf2daa9f0aa2b756b843dd3237a587c979242caaa9202fc956957f1bfc6a071b630683fc9e2c196c9e5fbff8b28c608639a1de40f34476824296014c76496f9101bc759e11d817cc81e6b62d91f6cdffbc3041bf701bff7e592d54cae84d60b129f446d5bfc9d5850aa38938bca0307fdcefa5f768ffdfbdd28e141aa3f575466bc9b0010f13bbe7f0252911542399a49a392e08e48f2d8101b256bc7a778986c5acdbfbbe775567a67674758d0ee6174684066f567f95caa20a08f8a5324a708dba9b6fa9dbfdc1edfc5ad40ba9dc60a2a477374461584621c5bc4895bb1693bf57874a84ad51464d8aba258c9007239445d81c9ea9b49fa72685d147f761b0567e31dfa5b178668b9d8c37c9ba46d58e772d42d485efd009ee9b1f64a1c144ac028a3b6a7bdd98c8b8814b9d8d411dbddd81c7532173a2e0e67219322ef7caa39c65ad6082763a0e2e425d5fc0e0f240606ba1afb2c72b6797a6aef8044e7f8097c2e0f2f9fd65969fbad4e72e3c9ba90000000000000000000000000000080f151f2529
+                </div>
+            </div>
+
+            <div>
+                <span class="text-slate-500 block">Issuer Public Key (Hex):</span>
+                <div id="pqc-publickey" class="text-slate-400 break-all bg-slate-900 p-2 rounded border border-slate-800 text-[10px]">
+                    307f548cd796f1d06a29114ff66f0b23ed624c4d451b0bfbe762a776d405628dc9063b635444141509f8249e1a49cf56836282a1b3a2cbc703acbb816b5e5685f3288c5777efebbab958d957fd64a601bfe6b363e960c26de46edba486206368cd7a21be16edf5f3e32efc4e806616906b20234b63dcc1dacf59612d75c2da341afaa5c9c26103523f6b530fde85d05a652b4a04fe213060a1d69e839ffd2aa61be1328be0b57fea250c1c75850faa25c6839300cec021dc9f360cecf94cc1f9ea46881cc747a7ceea735e4e3d5079c503fd2aee67eb9b7145776a57d48b56d534f45ba9841d5c46df567b7836f6f7236c241469c9e2ae3b7c776d8db37206bf207f535196b6bd2eaa0f6578ea68e3ac67dfb1860c07192f3f4e57dba6f38b7e250303c262b9bdec2af448b5ad4a4d2a6b569df6c5a6fd5743a429ea26898ecffc0e4681a19432283656d4c28ffc45b2fe7bf30a1026ff5b12ac54ea479760a73326ab9732cee0348dd198daa69ec2c2408a19c8d72267a55cc7975527b8220ebcc4bbbde1f5fdc1c1b8422432916c7fea8013838e1ece46eaa47272db851335379a85855f53dbf7127b6d625d7b655c533a72632e210aa9368bd6f0e7a3d2113167fc714cff50af3b9c2e0976f0ea63c1096c7b2f2511ab6146ebcd099121ca0bd1301e42b4e6727b25e016f2c05b04edc2e2bc7e667cd300d3080d327a067f110be2b6ca7ab885b03530bc76b9638f0c1d6a728d177bd0a57b2faa32cb6d18793db407e726c75fb70674f3e2b133138d453e73cb92c3c80f1d6c9d587cbce78f7e427c928cba7ac1ba3ce5d043fc790172ad08d4e399b5123af529a9c93493dd15cecd15c49ea32818eeec168040ebbf0659a5300e9c5c31d0bada8b8f150c42af39417eedafc84dfbe6816ab342d58533e31f9a4356c92fd56e923dd1fa57e89b8c9373b737ffb512ad37209131606d4bd00919e0fa051018769f3151157c5bbc6ac5df374aab2ae126fbe189e0dc44736a05dd4ecadaab728ccd26ad7396f3177798cb225d017cb951385ec03e8cd1a144c51b31f84bb0d62f4a9c2cb17e955fad5ac54e3d2474223182d88978b9ddfa2f605a557e5fe89dd545d1e5f5f67d448ab53c457327fe5aaab72a7547d627d16709466f929ab952a3481dcb25e920161504dfa8397d91e3826772e3d87f810db1e938f854aeda9e9f76e01d940bd65ff76c104ff4362228b719c8b3b277c67fee618311c82522cc94dd63c6b4ae690deeafe8dfb17e4b66f73184a94f4a82a28947bcf55e55a0f990b301ee9d6436e944d92731114c209066d2e8708683bb707f7b784a5558bfa8534f3723e4a438c5f3dacb2a29173554ff08068fae7b912f58ee7441b543176584f658df4a9b65abda32e97fa16e046b70d08434df7243d14cb27dabfa90bf83d2f19da5a3e3b3797ad930ed7498abc89f5afd58d6d375d7f6c5b3d35c318b8b637f62cebc40666a0d24f1c4e3be0efbc727cc8051780288b03ebf8bd0aec3c7e183d50d7c50f3647f943a89f4b1141bab4893eeeafb3b667c868d000b2878ca42639a31ca73c2e488c194700d463e648866032e2ace20e0529593ab2bf1b4040d16b5459710b85df3b85d687fa24c60a7374fb9615217f6a740b234ae8e38c9371f68354428b5d5815ffbfc77987f084d8dee8053f766bff8e0e8abf19e0064479b17f95b21ce5903415e5823a243b1f1756647aa20430b02bb546d47425f67f92a3862377a19ae14cd55536a9b17627f4b545be24db16e7768fed07302e3008e5a35d18147836863a2a86c6fc2a282b6e88a437f83e2971652ad40e6118fc9e50d2a0db54f995fa78318d3a6951a859a996006d31e7805182c08b26ed98feba33a74b235378fc54ef1f8cde0d7ef54e41a4bba8e211234d74cb9faec8a7bab30947de6959cbcd657656cec186fffc1ea1372dec07d8ddee503dd014a95213ab533f0271da32af1793b1622ffbe2cd88b8b16747373e7c6400783381e3ee30ac83024ad9032503a7ea18250a60a96e98bd8da5048d9de48b4ae5b8215cf01f2755a76584545f727d3a54e229481ab7f7bfcb87ba8a14ae63633fc3161cb5ca33d438a83f3a16263b1f394a02ed6cf12450906b96dd9e7a0d6df7df58f78b8a3f6e67b9d434b39a3a02b816f462c5c1c5422eaf00c0710413be9e8dc9e0e4e01153c6784ab5eef927f951a3df8df722c764b7e8d61341104c5e35a76b7c7d0eb66c05b6af0595915e3c2e852902addf7acf885c787dd50250dcbbbed2fee705cf4c1330acca300a102f2e67b18ca1e5bb5654874216eddb3c27d9bae221202733210af5b4eaaa563cbc6cacd453c62696f640b380aec29a069b74a9da36e554646f35dbbef8af09dcf9e16729b178dfda421f3ed7bd678549d6c29accbdb64b8671314576167bc786faab85e637e9a9e83a2302fb49368dd950eecaf66a4b94f10814aff1f744492a7afaa1dc7983165e20f1fc80f297f7844364326b47477973b36919e603ffb0cfb8c9658930b0f6f41eb5ac8902cd9b35858f6829f24fed213747f7558a6f20e54d013529c728d2e7ff375b35ea66afd2a2bf8dcfc37e50fcef190be087902f88d40fed87b51321b74b906e4a918c5da277976c093cd20f8576cac5db3d6eb0d264c321f49c9aee10876f314f1f0d55bb9802e57ee0d6e22fa880ec08eeb1171f62296a241184200f0892bdf24256cfb1fd08f96a5e16e7a7c3efdb167a4
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
