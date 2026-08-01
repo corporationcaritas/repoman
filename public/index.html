@@ -3,100 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caritas Corporation - Credential Verification Portal</title>
+    <title>Caritas Corporation - Sovereign Reentry & Quantum Credentials</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap');
-        .font-serif-title { font-family: 'Cinzel', serif; }
-        .font-sans-body { font-family: 'Montserrat', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;600&display=swap');
+        
+        .font-serif-brand { font-family: 'Cinzel', serif; }
+        .font-sans-body { font-family: 'Space Grotesk', sans-serif; }
         .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        .lattice-bg {
+            background-image: radial-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px), radial-gradient(rgba(245, 158, 11, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+        }
+
+        .border-gradient {
+            border-image: linear-gradient(to right, rgba(16, 185, 129, 0.4), rgba(245, 158, 11, 0.4), rgba(255, 255, 255, 0.05)) 1;
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans-body min-h-screen flex flex-col items-center justify-center p-4">
+<body class="bg-[#06080d] text-slate-100 font-sans-body min-h-screen lattice-bg flex flex-col justify-between selection:bg-amber-500 selection:text-black">
 
-    <div class="max-w-2xl w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl text-center">
-        <p class="font-serif-title text-amber-500 tracking-[0.2em] text-xs font-bold uppercase">Caritas Corporation</p>
-        <p class="text-[10px] text-slate-400 tracking-wider uppercase mb-4">Governed by The People (Decentralized Network Authority)</p>
+    <!-- Header / Branding Navigation -->
+    <nav class="border-b border-slate-800/80 bg-[#06080d]/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-emerald-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-serif-brand text-lg group-hover:scale-105 transition-transform">
+                    ❖
+                </div>
+                <div>
+                    <span class="font-serif-brand font-bold tracking-widest text-white text-base block leading-none">CARITAS</span>
+                    <span class="text-[9px] font-mono-code tracking-[0.25em] text-amber-400/90 uppercase block mt-1">Corporation</span>
+                </div>
+            </a>
+
+            <div class="flex items-center space-x-6 text-xs font-mono-code">
+                <a href="/.well-known/pqc-key.hex" class="hidden sm:inline-block text-slate-400 hover:text-emerald-400 transition-colors">
+                    [Key Registry]
+                </a>
+                <a href="/verify.html" class="px-4 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-emerald-300 font-semibold hover:bg-emerald-500/20 transition-all flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Audit Portal</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Mission Architecture Section -->
+    <main class="max-w-6xl mx-auto px-6 py-16 sm:py-24">
         
-        <h1 class="text-2xl font-bold text-white mb-2">Post-Quantum Credential Verifier</h1>
-        <p class="text-xs text-slate-400 mb-6 font-mono-code">NIST FIPS 204 ML-DSA-65 | Client-Side Zero-Knowledge Validation</p>
-
-        <!-- Dropzone -->
-        <div id="dropzone" class="border-2 border-dashed border-slate-700 hover:border-amber-500 rounded-xl p-10 cursor-pointer transition-colors bg-slate-950/50">
-            <svg class="w-12 h-12 text-slate-500 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-            </svg>
-            <p class="text-sm text-slate-300 font-semibold">Drag and drop your signed certificate (.html) here</p>
-            <p class="text-xs text-slate-500 mt-1">or click to browse local files</p>
-            <input type="file" id="fileInput" accept=".html" class="hidden">
+        <!-- Sovereign Governance Tag -->
+        <div class="inline-flex items-center space-x-3 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono-code mb-8">
+            <span class="text-amber-400">⚖</span>
+            <span class="tracking-wider uppercase">Governed by The People • Decentralized Authority</span>
         </div>
 
-        <!-- Verification Results Output -->
-        <div id="resultBox" class="hidden mt-6 text-left bg-slate-950 p-5 rounded-lg border border-slate-800 font-mono-code text-xs space-y-2">
-            <div id="statusBadge" class="font-bold text-sm mb-2"></div>
-            <div id="details"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Narrative -->
+            <div class="lg:col-span-7 space-y-6">
+                <h1 class="text-3xl sm:text-5xl font-bold font-serif-brand tracking-tight text-white leading-tight">
+                    Sovereign Credentials for Human Advancement & Reentry
+                </h1>
+                
+                <p class="text-slate-300 text-base leading-relaxed">
+                    Caritas Corporation bridges grassroots human potential with formal recognition. We issue tamper-proof educational, apprenticeship, and professional credentials powered by <strong class="text-emerald-400">NIST FIPS 204 Post-Quantum Cryptography (ML-DSA-65)</strong>.
+                </p>
+
+                <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono-code space-y-2">
+                    <div class="flex justify-between text-slate-400">
+                        <span>Root Authority:</span>
+                        <span class="text-amber-400">The People (Decentralized)</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Operational Issuer:</span>
+                        <span class="text-slate-200">Caritas Corporation</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Cryptographic Standard:</span>
+                        <span class="text-emerald-400">Module-Lattice Digital Signatures</span>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex flex-wrap gap-4 font-mono-code text-xs">
+                    <a href="/verify.html" class="px-6 py-3 rounded-xl bg-amber-500 text-slate-950 font-bold hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/10">
+                        Open Audit Verifier →
+                    </a>
+                    <a href="/.well-known/pqc-key.hex" target="_blank" class="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 transition-all">
+                        Fetch Root Public Key
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Visual Component: Non-Standard Quantum Hex Tile -->
+            <div class="lg:col-span-5">
+                <div class="bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 space-y-6 relative shadow-2xl">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                        <span class="text-xs font-mono-code text-slate-400">SYSTEM ARCHITECTURE</span>
+                        <span class="text-xs font-mono-code text-emerald-400">FIPS 204 ACTIVE</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800/80">
+                            <h3 class="text-sm font-bold text-slate-100 mb-1">Decentralized Trust Root</h3>
+                            <p class="text-xs text-slate-400">Governance anchored in collective civic authority, preventing institutional single points of failure.</p>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800/80">
+                            <h3 class="text-sm font-bold text-slate-100 mb-1">Lattice-Based Encryption</h3>
+                            <p class="text-xs text-slate-400">Protected by ML-DSA-65 algorithms designed to resist quantum computer cryptographic decryption.</p>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800/80">
+                            <h3 class="text-sm font-bold text-slate-100 mb-1">State Statutory Alignment</h3>
+                            <p class="text-xs text-slate-400">Structured according to standard Schema.org specifications for seamless government validation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
+    </main>
 
-    <script>
-        const dropzone = document.getElementById('dropzone');
-        const fileInput = document.getElementById('fileInput');
-        const resultBox = document.getElementById('resultBox');
-        const statusBadge = document.getElementById('statusBadge');
-        const details = document.getElementById('details');
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-[#06080d] py-8">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 font-mono-code gap-4">
+            <div>
+                © 2026 Caritas Corporation. All rights reserved.
+            </div>
+            <div class="flex space-x-6">
+                <a href="/verify.html" class="hover:text-emerald-400 transition-colors">Verifier Portal</a>
+                <a href="/.well-known/pqc-key.hex" class="hover:text-amber-400 transition-colors">Key Registry</a>
+            </div>
+        </div>
+    </footer>
 
-        dropzone.addEventListener('click', () => fileInput.click());
-        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('border-amber-500'); });
-        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('border-amber-500'));
-        dropzone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropzone.classList.remove('border-amber-500');
-            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-        });
-        fileInput.addEventListener('change', (e) => { if (e.target.files.length) handleFile(e.target.files[0]); });
-
-        async function handleFile(file) {
-            const text = await file.text();
-            resultBox.classList.remove('hidden');
-
-            const jsonMatch = text.match(/<script type="application\/ld\+json" id="credential-payload">([\s\S]*?)<\/script>/);
-            const sigMatch = text.match(/<div id="pqc-signature"[^>]*>\s*([\s\S]*?)\s*<\/div>/);
-
-            if (!jsonMatch || !sigMatch) {
-                statusBadge.className = "text-red-500 font-bold";
-                statusBadge.innerText = "❌ INVALID FILE FORMAT";
-                details.innerText = "Target HTML file does not contain a recognized JSON-LD payload or ML-DSA-65 signature.";
-                return;
-            }
-
-            try {
-                const payload = JSON.parse(jsonMatch[1].trim());
-                const sigHex = sigMatch[1].trim();
-
-                // Fetch authoritative public key directly from domain .well-known path
-                statusBadge.className = "text-amber-400 font-bold animate-pulse";
-                statusBadge.innerText = "⌛ FETCHING ROOT KEY FROM CARITASCORPORATION.ORG...";
-                
-                const pubKeyResp = await fetch('/.well-known/pqc-key.hex');
-                if(!pubKeyResp.ok) throw new Error("Could not retrieve public key from /.well-known/pqc-key.hex");
-                const pubKeyHex = (await pubKeyResp.text()).trim();
-
-                statusBadge.className = "text-emerald-400 font-bold";
-                statusBadge.innerText = "✅ DOCUMENT STRUCTURE & SIGNATURE PRESENT";
-                
-                details.innerHTML = `
-                    <div class="text-slate-300"><strong>Recipient:</strong> ${payload.credentialSubject?.name || 'N/A'}</div>
-                    <div class="text-slate-300"><strong>Issuer:</strong> ${payload.issuer?.name || 'N/A'}</div>
-                    <div class="text-slate-300"><strong>Governance:</strong> ${payload.issuer?.parentOrganization?.name || 'N/A'}</div>
-                    <div class="text-slate-300"><strong>Statutory Authority:</strong> ${payload.governancePolicy?.statutoryAuthority || 'N/A'}</div>
-                    <div class="text-emerald-400 border-t border-slate-800 pt-2 mt-2"><strong>Root Key Fetched:</strong> ${pubKeyHex.substring(0, 32)}...</div>
-                `;
-            } catch (err) {
-                statusBadge.className = "text-red-500 font-bold";
-                statusBadge.innerText = "❌ VERIFICATION ERROR";
-                details.innerText = err.message;
-            }
-        }
-    </script>
 </body>
 </html>

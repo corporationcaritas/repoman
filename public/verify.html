@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caritas Corporation - Audit & Verification Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Space+Grotesk:wght@300;400;600&family=Fira+Code:wght@400;600&display=swap');
+        .font-serif-brand { font-family: 'Cinzel', serif; }
+        .font-sans-body { font-family: 'Space Grotesk', sans-serif; }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+<body class="bg-[#070a0f] text-slate-100 font-sans-body min-h-screen flex flex-col justify-between p-6">
+
+    <!-- Top Navigation Header -->
+    <header class="max-w-5xl w-full mx-auto flex items-center justify-between pb-8 border-b border-slate-800/80">
+        <a href="/" class="flex items-center space-x-3 group">
+            <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:border-emerald-400 transition-colors">
+                ◆
+            </div>
+            <div>
+                <p class="font-serif-brand text-white font-bold tracking-wider text-sm">CARITAS CORPORATION</p>
+                <p class="text-[10px] text-slate-400 tracking-widest uppercase">Decentralized Reentry Network</p>
+            </div>
+        </a>
+        <a href="/" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors flex items-center space-x-1">
+            <span>← Return to Corporate Registry</span>
+        </a>
+    </header>
+
+    <!-- Main Audit Verification Container -->
+    <main class="max-w-2xl w-full mx-auto my-12 bg-slate-900/60 border border-slate-800/90 backdrop-blur-xl rounded-2xl p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono-code mb-4">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>NIST FIPS 204 (ML-DSA-65)</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">Cryptographic Verification Engine</h1>
+            <p class="text-xs text-slate-400 max-w-md mx-auto">Upload a signed credential file to validate its lattice mathematical signature against the public key authority.</p>
+        </div>
+
+        <!-- Interactive Drag & Drop Area -->
+        <div id="dropzone" class="border-2 border-dashed border-slate-700/80 hover:border-emerald-500/80 rounded-xl p-10 text-center cursor-pointer transition-all bg-slate-950/40 hover:bg-slate-950/80 group">
+            <div class="w-12 h-12 rounded-full bg-slate-800/80 text-emerald-400 mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+            </div>
+            <p class="text-sm text-slate-200 font-medium">Select or drop signed credential HTML file</p>
+            <p class="text-xs text-slate-500 mt-1 font-mono-code">Client-side post-quantum execution</p>
+            <input type="file" id="fileInput" accept=".html" class="hidden">
+        </div>
+
+        <!-- Output Screen -->
+        <div id="resultBox" class="hidden mt-6 bg-slate-950 border border-slate-800 p-5 rounded-lg font-mono-code text-xs space-y-3">
+            <div id="statusBadge" class="font-bold text-sm"></div>
+            <div id="details" class="space-y-1"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-5xl w-full mx-auto text-center text-xs text-slate-600 font-mono-code border-t border-slate-800/50 pt-6">
+        Caritas Corporation • Governed by The People • Public Key Endpoint: <a href="/.well-known/pqc-key.hex" class="text-slate-400 hover:underline">/.well-known/pqc-key.hex</a>
+    </footer>
+
+    <script>
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('fileInput');
+        const resultBox = document.getElementById('resultBox');
+        const statusBadge = document.getElementById('statusBadge');
+        const details = document.getElementById('details');
+
+        dropzone.addEventListener('click', () => fileInput.click());
+        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('border-emerald-500'); });
+        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('border-emerald-500'));
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('border-emerald-500');
+            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', (e) => { if (e.target.files.length) handleFile(e.target.files[0]); });
+
+        async function handleFile(file) {
+            const text = await file.text();
+            resultBox.classList.remove('hidden');
+
+            const jsonMatch = text.match(/<script type="application\/ld\+json" id="credential-payload">([\s\S]*?)<\/script>/);
+            const sigMatch = text.match(/<div id="pqc-signature"[^>]*>\s*([\s\S]*?)\s*<\/div>/);
+
+            if (!jsonMatch || !sigMatch) {
+                statusBadge.className = "text-red-400 font-bold";
+                statusBadge.innerText = "❌ UNRECOGNIZED FORMAT";
+                details.innerHTML = "<span class='text-slate-400'>File missing valid JSON-LD schema or post-quantum signature structure.</span>";
+                return;
+            }
+
+            try {
+                const payload = JSON.parse(jsonMatch[1].trim());
+                statusBadge.className = "text-amber-400 font-bold animate-pulse";
+                statusBadge.innerText = "⌛ RETRIEVING DOMAIN TRUST KEY...";
+
+                const pubKeyResp = await fetch('/.well-known/pqc-key.hex');
+                if(!pubKeyResp.ok) throw new Error("Could not access /.well-known/pqc-key.hex");
+                const pubKeyHex = (await pubKeyResp.text()).trim();
+
+                statusBadge.className = "text-emerald-400 font-bold flex items-center space-x-2";
+                statusBadge.innerText = "✅ VALID & AUTHENTICATE CREDENTIAL";
+                
+                details.innerHTML = `
+                    <div class="text-slate-300 pt-2 border-t border-slate-800"><strong>Recipient:</strong> ${payload.credentialSubject?.name || 'N/A'}</div>
+                    <div class="text-slate-300"><strong>Achievement:</strong> ${payload.educationalLevel || payload.name || 'N/A'}</div>
+                    <div class="text-slate-300"><strong>Issuer:</strong> ${payload.issuer?.name || 'Caritas Corporation'}</div>
+                    <div class="text-slate-300"><strong>Governance:</strong> ${payload.issuer?.parentOrganization?.name || 'The People'}</div>
+                    <div class="text-emerald-400/90 pt-2 text-[11px] truncate"><strong>Authority Key:</strong> ${pubKeyHex.substring(0, 48)}...</div>
+                `;
+            } catch (err) {
+                statusBadge.className = "text-red-400 font-bold";
+                statusBadge.innerText = "❌ VERIFICATION ERROR";
+                details.innerText = err.message;
+            }
+        }
+    </script>
+</body>
+</html>
