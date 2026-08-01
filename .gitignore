@@ -5,3 +5,6 @@ caritas_pqc_private.hex
 node_modules/
 .wrangler/
 .env
+caritas_pqc_private.hex
+.wrangler/
+node_modules/
