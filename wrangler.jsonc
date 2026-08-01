@@ -5,7 +5,7 @@
   "assets": {
     "directory": "public",
     "html_handling": "drop-trailing-slash",
-    "not_found_handling": "single-page-application"
+    "not_found_handling": "none"
   },
   "compatibility_flags": [
     "nodejs_compat"
